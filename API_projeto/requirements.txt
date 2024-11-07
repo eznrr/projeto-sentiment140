@@ -1,0 +1,9 @@
+Comandos para instalacao de dependencias:
+pip install flask
+pip install flask-cors
+pip install joblib
+pip install scikit-learn
+
+Flask==2.0.3
+flask-cors==3.0.10
+scikit-learn==0.24.2
