@@ -1,16 +1,22 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
+import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = Flask(__name__)
 CORS(app)
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model_path = os.path.join(BASE_DIR, "modelo_vetor", "modelo.pkl")
+vectorizer_path = os.path.join(BASE_DIR, "modelo_vetor", "vetor_tfidf.pkl")
+
 # puxo o modelo já treinado e binzarizado, aqui contem todas as funçõe e parametros do modelo
-model = joblib.load(r'C:\Users\ezn52\OneDrive\Área de Trabalho\projeto-sentiment140\API_projeto\modelo_vetor\modelo.pkl')
+model = joblib.load(model_path)
 
 # puxo o modelo de tfidf já treinado com o meu datasset previo, contendo os pesos atribuidos as palavras
-tfidf_vectorizer = joblib.load(r'C:\Users\ezn52\OneDrive\Área de Trabalho\projeto-sentiment140\API_projeto\modelo_vetor\vetor_tfidf.pkl')
+tfidf_vectorizer = joblib.load(vectorizer_path)
 
 # defino o resquest para o caminho /predict, e recebo dados com metodo Post
 @app.route('/predict', methods=['POST'])
